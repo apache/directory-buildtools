@@ -52,14 +52,12 @@ public class ConcurrentJunitRunner extends BlockJUnit4ClassRunner
             Queue<Future<Void>> tasks = new LinkedList<Future<Void>>();
 
 
-            @Override
             public void schedule( Runnable childStatement )
             {
                 tasks.offer( completionService.submit( childStatement, null ) );
             }
 
 
-            @Override
             public void finished()
             {
                 try
@@ -94,7 +92,6 @@ public class ConcurrentJunitRunner extends BlockJUnit4ClassRunner
         }
 
 
-        @Override
         public Thread newThread( Runnable r )
         {
             return new Thread( group, r, group.getName() + "-thread-" + threadNumber.getAndIncrement(), 0 );
