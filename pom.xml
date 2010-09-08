@@ -27,7 +27,7 @@
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
   <version>0.1-SNAPSHOT</version>
-  <name>junit-addons</name>
+  <name>Apache Directory JUnit Add-ons</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
