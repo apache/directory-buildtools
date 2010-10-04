@@ -85,12 +85,16 @@
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
         <module name="JavadocMethod">
+          <!-- No Javadoc required for private methods -->
           <property name="scope" value="protected"/>
         </module>
         <module name="JavadocType">
           <property name="scope" value="public"/>
         </module>
-        <module name="JavadocVariable"/>
+        <module name="JavadocVariable">
+          <!-- No Javadoc required for private fields -->
+          <property name="scope" value="protected"/>
+        </module>
         <module name="JavadocStyle">
             <property name="checkFirstSentence" value="false"/>
         </module>
@@ -193,7 +197,11 @@
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
-        <module name="VisibilityModifier"/>
+        <module name="VisibilityModifier">
+            <property name="packageAllowed" value="true"/>
+            <property name="protectedAllowed" value="true"/>
+        </module>
+        
 
 
         <!-- Miscellaneous other checks.                   -->
