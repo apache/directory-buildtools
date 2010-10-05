@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.directory.project</groupId>
     <artifactId>project</artifactId>
-    <version>17</version>
+    <version>18</version>
   </parent>
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
@@ -31,6 +31,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <skin.version>1.0.2-SNAPSHOT</skin.version>
   </properties>
 
   <dependencies>
