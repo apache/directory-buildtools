@@ -31,7 +31,7 @@
   <artifactId>directory-checkstyle</artifactId>
   <name>Apache Directory Checkstyle Configuration</name>
   <packaging>jar</packaging>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
 
   <description>
      Customized checkstyle configuration used by the maven-checkstyle-plugin.
@@ -54,9 +54,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/trunk/checkstyle</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/trunk/checkstyle</developerConnection>
-    <url>http://svn.apache.org/viewvc/directory/buildtools/trunk/checkstyle</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/tags/0.1</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/tags/0.1</developerConnection>
+    <url>http://svn.apache.org/viewvc/directory/buildtools/tags/0.1</url>
   </scm>
 
 </project>
