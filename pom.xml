@@ -43,7 +43,7 @@
 
   <distributionManagement>
     <site>
-      <id>apache.directory.buildtools.checkstyle</id>
+      <id>apache.directory</id>
       <url>${distMgmtSiteUrl}</url>
     </site>
   </distributionManagement>
