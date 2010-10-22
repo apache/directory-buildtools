@@ -23,6 +23,7 @@ package org.apache.directory.junit.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
@@ -43,19 +44,39 @@ import org.junit.runners.model.Statement;
  */
 public class MultiThreadedMultiInvoker implements MethodRule
 {
-
-    private int numThreads = 10;
-    private int numInvocationsPerThread = 100;
+    private static AtomicInteger threadCounter = new AtomicInteger();
+    private int numThreads;
+    private int numInvocationsPerThread;
+    private boolean trace;
 
 
     /**
      * Instantiates a new multi threaded invoker.
      * 
-     * Using this default constructor each test method is invoked 100 times
-     * by 10 thread.
+     * The number of threads and invocations per thread are derived from 
+     * system properties 'threads' and 'invocations'.
      */
     public MultiThreadedMultiInvoker()
     {
+        this.numThreads = getSystemIntProperty( "mtmi.threads", 1 );
+        this.numInvocationsPerThread = getSystemIntProperty( "mtmi.invocations", 1 );
+        this.trace = getSystemBoolProperty( "mtmi.trace", false );
+    }
+
+
+    private int getSystemIntProperty( String key, int def )
+    {
+        String property = System.getProperty( key, "" + def );
+        int value = Integer.parseInt( property );
+        return value;
+    }
+
+
+    private boolean getSystemBoolProperty( String key, boolean def )
+    {
+        String property = System.getProperty( key, "" + def );
+        boolean value = Boolean.parseBoolean( property );
+        return value;
     }
 
 
@@ -70,6 +91,23 @@ public class MultiThreadedMultiInvoker implements MethodRule
         super();
         this.numThreads = numThreads;
         this.numInvocationsPerThread = numInvocationsPerThread;
+        this.trace = false;
+    }
+
+
+    /**
+     * Instantiates a new multi threaded multi invoker.
+     *
+     * @param numThreads the number of threads
+     * @param numInvocationsPerThread the number of method invocations per thread
+     * @param trace the trace flag
+     */
+    public MultiThreadedMultiInvoker( int numThreads, int numInvocationsPerThread, boolean trace )
+    {
+        super();
+        this.numThreads = numThreads;
+        this.numInvocationsPerThread = numInvocationsPerThread;
+        this.trace = trace;
     }
 
 
@@ -86,8 +124,14 @@ public class MultiThreadedMultiInvoker implements MethodRule
             @Override
             public void evaluate() throws Throwable
             {
+                int count = numThreads;
+                if ( method.getAnnotation( NoMultiThreadedInvocation.class ) != null )
+                {
+                    count = 1;
+                }
 
-                for ( int threadNum = 0; threadNum < numThreads; threadNum++ )
+                final long start = System.currentTimeMillis();
+                for ( int threadNum = 0; threadNum < count; threadNum++ )
                 {
                     Runnable r = new Runnable()
                     {
@@ -97,17 +141,31 @@ public class MultiThreadedMultiInvoker implements MethodRule
                             {
                                 for ( int invocationNum = 0; invocationNum < numInvocationsPerThread; invocationNum++ )
                                 {
+                                    if ( trace )
+                                    {
+                                        long t = System.currentTimeMillis() - start;
+                                        System.out.println( t + " - " + method.getName() + " - "
+                                            + Thread.currentThread().getName() + " - Invocation "
+                                            + ( invocationNum + 1 ) + "/" + numInvocationsPerThread );
+                                    }
+
                                     base.evaluate();
                                 }
                             }
                             catch ( Throwable t )
                             {
+                                if ( trace )
+                                {
+                                    t.printStackTrace();
+                                }
                                 throwables.add( t );
                             }
                         }
                     };
 
-                    Thread t = new Thread( r );
+                    String name = MultiThreadedMultiInvoker.class.getSimpleName() + "-Thread-"
+                        + threadCounter.incrementAndGet();
+                    Thread t = new Thread( r, name );
                     threads.add( t );
                 }
 
