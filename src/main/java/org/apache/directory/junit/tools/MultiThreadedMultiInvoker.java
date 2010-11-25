@@ -44,6 +44,8 @@ import org.junit.runners.model.Statement;
  */
 public class MultiThreadedMultiInvoker implements MethodRule
 {
+    public static final boolean THREADSAFE = true;
+    public static final boolean NOT_THREADSAFE = false;
     private static AtomicInteger threadCounter = new AtomicInteger();
     private int numThreads;
     private int numInvocationsPerThread;
@@ -55,10 +57,12 @@ public class MultiThreadedMultiInvoker implements MethodRule
      * 
      * The number of threads and invocations per thread are derived from 
      * system properties 'threads' and 'invocations'.
+     * 
+     * @param threadSafe whether the tested class is thread safe
      */
-    public MultiThreadedMultiInvoker()
+    public MultiThreadedMultiInvoker( boolean threadSafe )
     {
-        this.numThreads = getSystemIntProperty( "mtmi.threads", 1 );
+        this.numThreads = threadSafe ? getSystemIntProperty( "mtmi.threads", 1 ) : 1;
         this.numInvocationsPerThread = getSystemIntProperty( "mtmi.invocations", 1 );
         this.trace = getSystemBoolProperty( "mtmi.trace", false );
     }
