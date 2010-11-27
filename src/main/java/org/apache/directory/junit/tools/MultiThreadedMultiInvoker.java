@@ -23,6 +23,9 @@ package org.apache.directory.junit.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.rules.MethodRule;
@@ -46,7 +49,7 @@ public class MultiThreadedMultiInvoker implements MethodRule
 {
     public static final boolean THREADSAFE = true;
     public static final boolean NOT_THREADSAFE = false;
-    private static AtomicInteger threadCounter = new AtomicInteger();
+    private static ExecutorService pool = Executors.newCachedThreadPool();
     private int numThreads;
     private int numInvocationsPerThread;
     private boolean trace;
@@ -121,7 +124,7 @@ public class MultiThreadedMultiInvoker implements MethodRule
     public Statement apply( final Statement base, final FrameworkMethod method, final Object target )
     {
         final List<Throwable> throwables = Collections.synchronizedList( new ArrayList<Throwable>() );
-        final List<Thread> threads = new ArrayList<Thread>();
+        final List<Runnable> runnables = new ArrayList<Runnable>();
 
         return new Statement()
         {
@@ -135,6 +138,7 @@ public class MultiThreadedMultiInvoker implements MethodRule
                 }
 
                 final long start = System.currentTimeMillis();
+                final AtomicInteger counter = new AtomicInteger();
                 for ( int threadNum = 0; threadNum < count; threadNum++ )
                 {
                     Runnable r = new Runnable()
@@ -164,23 +168,25 @@ public class MultiThreadedMultiInvoker implements MethodRule
                                 }
                                 throwables.add( t );
                             }
+                            finally
+                            {
+                                counter.decrementAndGet();
+                            }
                         }
                     };
 
-                    String name = MultiThreadedMultiInvoker.class.getSimpleName() + "-Thread-"
-                        + threadCounter.incrementAndGet();
-                    Thread t = new Thread( r, name );
-                    threads.add( t );
+                    runnables.add( r );
+                    counter.incrementAndGet();
                 }
 
-                for ( Thread thread : threads )
+                for ( Runnable r : runnables )
                 {
-                    thread.start();
+                    pool.execute( r );
                 }
-
-                for ( Thread thread : threads )
+                
+                while(counter.get() > 0)
                 {
-                    thread.join();
+                    Thread.sleep( 1000 );
                 }
 
                 if ( !throwables.isEmpty() )
