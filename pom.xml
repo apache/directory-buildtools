@@ -39,7 +39,7 @@
 
   <properties>
     <skin.version>1.0.2</skin.version>
-    <distMgmtSiteUrl>scpexe://people.apache.org/www/directory.apache.org/checkstyle-configuration/gen-docs/${version}/</distMgmtSiteUrl>
+    <distMgmtSiteUrl>scpexe://people.apache.org/www/directory.apache.org/checkstyle-configuration/gen-docs/${project.version}/</distMgmtSiteUrl>
   </properties>
 
   <distributionManagement>
