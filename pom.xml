@@ -55,8 +55,8 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/trunk/junit-addons</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/trunk/junit-addons</developerConnection>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/junit-addons/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/junit-addons/trunk</developerConnection>
     <url>http://svn.apache.org/viewvc/directory/buildtools/trunk/junit-addons</url>
   </scm>
 </project>
