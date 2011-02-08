@@ -55,9 +55,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/trunk/checkstyle-configuration</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/trunk/checkstyle-configuration</developerConnection>
-    <url>http://svn.apache.org/viewvc/directory/buildtools/trunk/checkstyle-configuration</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/checkstyle-configuration/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/checkstyle-configuration/trunk</developerConnection>
+    <url>http://svn.apache.org/viewvc/directory/buildtools/checkstyle-configuration/trunk</url>
   </scm>
 
 </project>
