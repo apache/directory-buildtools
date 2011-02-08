@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
-  <version>0.1</version>
+  <version>0.2-SNAPSHOT</version>
   <name>Apache Directory JUnit Add-ons</name>
 
   <properties>
@@ -55,8 +55,8 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/junit-addons/tags/junit-addons-0.1</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/junit-addons/tags/junit-addons-0.1</developerConnection>
-    <url>http://svn.apache.org/viewvc/directory/buildtools/tags/junit-addons-0.1</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/junit-addons/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/junit-addons/trunk</developerConnection>
+    <url>http://svn.apache.org/viewvc/directory/buildtools/trunk/junit-addons</url>
   </scm>
 </project>
