@@ -60,9 +60,9 @@ under the License.
   </modules>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/skins/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/skins/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/directory/skins/trunk</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/skins/trunk</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/skins/trunk</developerConnection>
+    <url>http://svn.apache.org/viewvc/directory/buildtools/skins/trunk</url>
   </scm>
 
   <build>
