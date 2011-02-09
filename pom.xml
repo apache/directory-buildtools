@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.1-SNAPSHOT</version>
   <name>Apache Directory JUnit Add-ons</name>
 
   <properties>
