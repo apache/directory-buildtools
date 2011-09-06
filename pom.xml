@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.apache.directory.project</groupId>
     <artifactId>project</artifactId>
-    <version>22</version>
+    <version>23</version>
   </parent>
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
@@ -38,7 +38,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.8.2</version>
+      <version>4.9</version>
     </dependency>
   </dependencies>
 
