@@ -24,6 +24,7 @@
     <artifactId>project</artifactId>
     <version>26</version>
   </parent>
+  
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
   <version>0.2-SNAPSHOT</version>
