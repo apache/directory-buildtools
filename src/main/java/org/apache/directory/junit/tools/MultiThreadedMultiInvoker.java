@@ -23,10 +23,10 @@ package org.apache.directory.junit.tools;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Future;
 
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
@@ -123,9 +123,6 @@ public class MultiThreadedMultiInvoker implements MethodRule
      */
     public Statement apply( final Statement base, final FrameworkMethod method, final Object target )
     {
-        final List<Throwable> throwables = Collections.synchronizedList( new ArrayList<Throwable>() );
-        final List<Runnable> runnables = new ArrayList<Runnable>();
-
         return new Statement()
         {
             @Override
@@ -138,12 +135,14 @@ public class MultiThreadedMultiInvoker implements MethodRule
                 }
 
                 final long start = System.currentTimeMillis();
-                final AtomicInteger counter = new AtomicInteger();
+                final List<Throwable> throwables = Collections.synchronizedList( new ArrayList<Throwable>() );
+
+                final List<Future<Void>> futures = new ArrayList<Future<Void>>();
                 for ( int threadNum = 0; threadNum < count; threadNum++ )
                 {
-                    Runnable r = new Runnable()
+                    Callable<Void> c = new Callable<Void>()
                     {
-                        public void run()
+                        public Void call() throws Exception
                         {
                             try
                             {
@@ -168,27 +167,18 @@ public class MultiThreadedMultiInvoker implements MethodRule
                                 }
                                 throwables.add( t );
                             }
-                            finally
-                            {
-                                counter.decrementAndGet();
-                            }
+                            return null;
                         }
                     };
 
-                    runnables.add( r );
-                    counter.incrementAndGet();
+                    Future<Void> future = pool.submit( c );
+                    futures.add( future );
                 }
 
-                for ( Runnable r : runnables )
+                for ( Future<Void> future : futures )
                 {
-                    pool.execute( r );
+                    future.get();
                 }
-                
-                while(counter.get() > 0)
-                {
-                    Thread.sleep( 1000 );
-                }
-
                 if ( !throwables.isEmpty() )
                 {
                     throw throwables.get( 0 );
