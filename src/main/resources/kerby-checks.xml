@@ -46,8 +46,6 @@
 
     <module name="TreeWalker">
 
-        <property name="cacheFile" value="${checkstyle.cache.file}"/>
-
         <!-- required for SuppressWarningsFilter (and other Suppress* rules not used here) -->
         <!-- see http://checkstyle.sourceforge.net/config_annotation.html#SuppressWarningsHolder -->
         <module name="SuppressWarningsHolder"/>
@@ -87,8 +85,15 @@
         <module name="IllegalInstantiation"/>
 
 
+        <!-- Checks for class design                         -->
+        <!-- See http://checkstyle.sf.net/config_design.html -->
+        <module name="FinalClass"/>
+        <module name="InterfaceIsType"/>
+
+
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
+        <module name="ArrayTypeStyle"/>
         <module name="UpperEll"/>
 
 
