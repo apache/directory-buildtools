@@ -53,7 +53,11 @@
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See http://checkstyle.sf.net/config_naming.html -->
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="MemberName"/>
         <module name="PackageName"/>
+        <module name="StaticVariableName"/>
 
 
         <!-- Checks for imports                              -->
