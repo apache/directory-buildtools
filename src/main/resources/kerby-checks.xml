@@ -58,12 +58,22 @@
         <module name="MemberName"/>
         <module name="PackageName"/>
         <module name="StaticVariableName"/>
+        <module name="TypeName"/>
 
 
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
+
+        <!-- Checks for Size Violations.                    -->
+        <!-- See http://checkstyle.sf.net/config_sizes.html -->
+        <module name="MethodLength">
+           <property name="max" value="200"/>
+        </module>
+        <module name="ParameterNumber">
+           <property name="max" value="8"/>
+        </module>
 
 
         <!-- Checks for whitespace                               -->
@@ -74,6 +84,7 @@
 
         <!-- Modifier Checks                                    -->
         <!-- See http://checkstyle.sf.net/config_modifiers.html -->
+        <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
 
 
