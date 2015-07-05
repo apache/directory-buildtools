@@ -84,20 +84,20 @@
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <module name="JavadocMethod">
-          <!-- No Javadoc required for private methods -->
-          <property name="scope" value="protected"/>
-        </module>
-        <module name="JavadocType">
-          <property name="scope" value="public"/>
-        </module>
-        <module name="JavadocVariable">
-          <!-- No Javadoc required for private fields -->
-          <property name="scope" value="protected"/>
-        </module>
-        <module name="JavadocStyle">
-            <property name="checkFirstSentence" value="false"/>
-        </module>
+<!--         <module name="JavadocMethod"> -->
+<!--           No Javadoc required for private methods -->
+<!--           <property name="scope" value="protected"/> -->
+<!--         </module> -->
+<!--         <module name="JavadocType"> -->
+<!--           <property name="scope" value="public"/> -->
+<!--         </module> -->
+<!--         <module name="JavadocVariable"> -->
+<!--           No Javadoc required for private fields -->
+<!--           <property name="scope" value="protected"/> -->
+<!--         </module> -->
+<!--         <module name="JavadocStyle"> -->
+<!--             <property name="checkFirstSentence" value="false"/> -->
+<!--         </module> -->
 
 
         <!-- Checks for Naming Conventions.                  -->
@@ -146,14 +146,24 @@
         <!-- Checks for whitespace                               -->
         <!-- See http://checkstyle.sf.net/config_whitespace.html -->
         <module name="EmptyForIteratorPad"/>
-        <!-- module name="MethodParamPad"/ -->
-        <!-- module name="NoWhitespaceAfter"/ -->
-        <!-- module name="NoWhitespaceBefore"/ -->
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS"/>
+        </module>
+        <module name="NoWhitespaceBefore"/>
         <module name="OperatorWrap"/>
-        <!-- module name="ParenPad"/ -->
-        <!-- module name="TypecastParenPad"/ -->
-        <!-- module name="WhitespaceAfter"/ -->
-        <!-- module name="WhitespaceAround"/ -->
+        <module name="ParenPad">
+             <property name="tokens" value="ANNOTATION_FIELD_DEF, CTOR_DEF, CTOR_CALL, EXPR, LITERAL_CATCH, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_NEW, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE, METHOD_CALL, METHOD_DEF, RESOURCE_SPECIFICATION, SUPER_CTOR_CALL, QUESTION"/>
+             <property name="option" value="space"/>
+        </module>
+        <module name="TypecastParenPad">
+            <property name="option" value="space"/>
+        </module>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+        <module name="EmptyLineSeparator">
+            <property name="tokens" value="IMPORT, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, CTOR_DEF, METHOD_DEF, STATIC_INIT, INSTANCE_INIT"/>
+        </module>
 
 
         <!-- Modifier Checks                                    -->
@@ -166,30 +176,31 @@
         <!-- See http://checkstyle.sf.net/config_blocks.html -->
         <module name="AvoidNestedBlocks"/>
         <module name="EmptyBlock"/>
-        <!-- module name="LeftCurly"/ -->
+        <module name="LeftCurly">
+            <property name="option" value="nl"/>
+        </module>
         <module name="NeedBraces"/>
-        <!-- module name="RightCurly"/ -->
+        <module name="RightCurly">
+            <property name="option" value="alone"/>
+        </module>
 
 
         <!-- Checks for common coding problems               -->
         <!-- See http://checkstyle.sf.net/config_coding.html -->
-        <module name="AvoidInlineConditionals"/>
-        <module name="DoubleCheckedLocking"/>    <!-- MY FAVOURITE -->
+        <!-- module name="AvoidInlineConditionals"/ -->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
         <module name="HiddenField">
             <property name="ignoreSetter" value="true"/>
             <property name="ignoreConstructorParameter" value="true"/>
+            <property name="setterCanReturnItsClass" value="true"/>
         </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <!-- module name="MagicNumber"/ -->
         <module name="MissingSwitchDefault"/>
-        <module name="RedundantThrows">
-            <property name="allowUnchecked" value="true"/>
-        </module>
         <module name="SimplifyBooleanExpression"/>
-        <module name="SimplifyBooleanReturn"/>
+        <!-- module name="SimplifyBooleanReturn"/ -->
 
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
