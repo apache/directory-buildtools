@@ -32,7 +32,7 @@
   <artifactId>checkstyle-configuration</artifactId>
   <name>Apache Directory Checkstyle Configuration</name>
   <packaging>jar</packaging>
-  <version>0.2-SNAPSHOT</version>
+  <version>0.2</version>
 
   <description>
      Customized checkstyle configuration used by the maven-checkstyle-plugin.
@@ -56,9 +56,9 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/checkstyle-configuration/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/checkstyle-configuration/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/directory/buildtools/checkstyle-configuration/trunk</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/checkstyle-configuration/tags/0.2</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/checkstyle-configuration/tags/0.2</developerConnection>
+    <url>http://svn.apache.org/viewvc/directory/buildtools/checkstyle-configuration/tags/0.2</url>
   </scm>
 
 </project>
