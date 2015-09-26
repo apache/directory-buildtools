@@ -161,7 +161,9 @@
         <module name="TypecastParenPad">
             <property name="option" value="space"/>
         </module>
-        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAfter">
+            <property name="tokens" value="COMMA, TYPECAST"/>
+        </module>
         <module name="WhitespaceAround"/>
         <module name="EmptyLineSeparator">
             <property name="tokens" value="IMPORT, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, CTOR_DEF, METHOD_DEF, STATIC_INIT, INSTANCE_INIT"/>
