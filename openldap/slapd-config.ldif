@@ -1,0 +1,34 @@
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcArgsFile: /var/lib/openldap/run/slapd.args
+olcPidFile: /var/lib/openldap/run/slapd.pid
+olcTLSCACertificateFile: /etc/ssl/certs/ldap.pem
+olcTLSCertificateFile: /etc/ssl/certs/ldap.pem
+olcTLSCertificateKeyFile: /etc/ssl/private/ldap.pem
+
+dn: cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: schema
+
+include: file:///etc/openldap/schema/core.ldif
+
+include: file:///etc/openldap/schema/cosine.ldif
+
+include: file:///etc/openldap/schema/inetorgperson.ldif
+
+dn: olcDatabase=frontend,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcFrontendConfig
+olcDatabase: frontend
+
+dn: olcDatabase=mdb,cn=config
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: mdb
+olcSuffix: dc=example,dc=com
+olcRootDN: cn=admin,dc=example,dc=com
+olcRootPW: secret
+olcDbDirectory: /var/lib/openldap/openldap-data
+olcDbIndex: objectClass eq
+
