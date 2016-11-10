@@ -25,7 +25,7 @@ under the License.
   <parent>
     <groupId>org.apache.directory.skins</groupId>
     <artifactId>directory-parent-skin</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>directory-studio-skin</artifactId>
