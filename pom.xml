@@ -26,7 +26,7 @@ under the License.
   <parent>
     <groupId>org.apache.directory.project</groupId>
     <artifactId>project</artifactId>
-    <version>38-SNAPSHOT</version>
+    <version>38</version>
     <relativePath />
   </parent>
 
