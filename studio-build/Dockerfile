@@ -19,8 +19,10 @@
 
 FROM maven
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends xvfb
+RUN apt-get install -y --no-install-recommends krb5-config krb5-user
 
 RUN mkdir /home/studio && chmod 777 /home/studio
 WORKDIR /home/studio
@@ -32,6 +34,9 @@ ADD mvn /usr/local/bin
 RUN chmod 755 /usr/local/bin/mvn
 
 ADD krb5.conf /etc/
+
+# Make /etc/passwd writeable to be able to inject username
+RUN chmod 666 /etc/passwd
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD "/bin/bash"
