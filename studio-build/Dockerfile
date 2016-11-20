@@ -24,20 +24,23 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends xvfb
 RUN apt-get install -y --no-install-recommends krb5-config krb5-user
 
-RUN mkdir /home/studio && chmod 777 /home/studio
-WORKDIR /home/studio
+# Create home directory
+RUN mkdir /home/hnelson && chmod 777 /home/hnelson
+WORKDIR /home/hnelson
 
-ADD entrypoint.sh /usr/local/bin
-RUN chmod 755 /usr/local/bin/entrypoint.sh
-
-ADD mvn /usr/local/bin
-RUN chmod 755 /usr/local/bin/mvn
-
+# Add krb5.conf with EXAMPLE.COM domain
 ADD krb5.conf /etc/
 
-# Make /etc/passwd writeable to be able to inject username
+# Make /etc/passwd writeable to be able to inject username with dynamic uid/gid
 RUN chmod 666 /etc/passwd
 
+# Add and configure entrypoint script
+ADD entrypoint.sh /usr/local/bin
+RUN chmod 755 /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD "/bin/bash"
+
+# Add build script and make it the default command
+ADD build-studio-with-ui-tests.sh /usr/local/bin
+RUN chmod 755 /usr/local/bin/build-studio-with-ui-tests.sh
+CMD "/usr/local/bin/build-studio-with-ui-tests.sh"
 

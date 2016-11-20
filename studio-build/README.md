@@ -40,15 +40,27 @@ It contains all requirements:
 
 ## Usage
 
+Local
+
     PATH_TO_STUDIO_SRC=...
     docker run -it --rm \
         -u $(id -u):$(id -g) \
-        -e HOME=/home/studio \
-        -v ~/.m2:/home/studio/.m2 \
-        -v $PATH_TO_STUDIO_SRC:/home/studio/src \
+        -e HOME=/home/hnelson \
+        -v ~/.m2:/home/hnelson/.m2 \
+        -v $PATH_TO_STUDIO_SRC:/home/hnelson/studio \
         apachedirectory/studio-build bash
 
-    cd /home/studio/src
+    cd /home/hnelson/studio
+    mvn -f pom-first.xml clean install
     mvn clean install -Denable-ui-tests
+
+
+On Jenkins
+
+    docker run -i --rm \
+        -u $(id -u):$(id -g) \
+        -e HOME=/home/hnelson \
+        -v $(pwd):/home/hnelson/studio \
+        apachedirectory/studio-build
 
 
