@@ -20,20 +20,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.apache.directory.project</groupId>
-    <artifactId>project</artifactId>
-    <version>32</version>
+    <groupId>org.apache.directory.buildtools</groupId>
+    <artifactId>buildtools-parent</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <relativePath>../</relativePath>
   </parent>
   
   <groupId>org.apache.directory.junit</groupId>
   <artifactId>junit-addons</artifactId>
-  <version>0.2-SNAPSHOT</version>
   <name>Apache Directory JUnit Add-ons</name>
   <packaging>bundle</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <skin.version>1.0.2</skin.version>
   </properties>
 
   <dependencies>
@@ -44,24 +43,6 @@
     </dependency>
   </dependencies>
 
-  <distributionManagement>
-    <site>
-      <id>apache.directory.buildtools.junit-addons</id>
-      <url>${distMgmtSiteUrl}</url>
-    </site>
-  </distributionManagement>
-
-  <issueManagement>
-    <system>JIRA</system>
-    <url>http://issues.apache.org/jira/browse/DIR</url>
-  </issueManagement>
-
-  <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/buildtools/junit-addons/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/buildtools/junit-addons/trunk</developerConnection>
-    <url>http://svn.apache.org/viewvc/directory/buildtools/trunk/junit-addons</url>
-  </scm>
-  
   <build>
     <plugins>
       <plugin>
