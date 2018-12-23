@@ -17,7 +17,8 @@
 #   under the License.
 #
 
-FROM maven
+ARG JDK_VERSION=8
+FROM maven:3-jdk-${JDK_VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update

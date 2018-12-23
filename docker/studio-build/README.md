@@ -21,8 +21,8 @@
 A docker image to run Apache Directory Studio build included full test suite within a docker container.
 
 It contains all requirements:
-* Java 8
-* Maven 3
+* OpenJDK 8 or 11
+* Maven 3.6
 * Xvfb (for running UI tests)
 * LDAP client
 * Kerberos client
@@ -30,37 +30,39 @@ It contains all requirements:
 
 ## Build image
 
-    docker build -t apachedirectory/studio-build .
+See <https://hub.docker.com/_/maven> for available Maven base image tags.
+
+    JDK_VERSION=8
+    docker pull maven:3-jdk-${JDK_VERSION}
+    docker build -t apachedirectory/studio-build:jdk-${JDK_VERSION} --build-arg JDK_VERSION=${JDK_VERSION} .
 
 
 ## Publish image
 
-    docker push apachedirectory/studio-build
+    docker push apachedirectory/studio-build:jdk-${JDK_VERSION}
 
 
 ## Usage
 
-Local
+Local:
 
-    PATH_TO_STUDIO_SRC=...
     docker run -it --rm \
         -u $(id -u):$(id -g) \
-        -e HOME=/home/hnelson \
         -v ~/.m2:/home/hnelson/.m2 \
-        -v $PATH_TO_STUDIO_SRC:/home/hnelson/studio \
-        apachedirectory/studio-build bash
+        -v $(pwd):/home/hnelson/studio \
+        apachedirectory/studio-build:jdk-8 bash
 
     cd /home/hnelson/studio
     mvn -f pom-first.xml clean install
     mvn clean install -Denable-ui-tests
 
 
-On Jenkins
+On Jenkins:
 
     docker run -i --rm \
         -u $(id -u):$(id -g) \
-        -e HOME=/home/hnelson \
+        -v ~/.m2:/home/hnelson/.m2 \
         -v $(pwd):/home/hnelson/studio \
-        apachedirectory/studio-build
+        apachedirectory/studio-build:jdk-8
 
 

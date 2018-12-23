@@ -1,5 +1,0 @@
-#!/bin/bash
-echo "$@"
-echo "$HOME"
-/usr/bin/mvn -Duser.home=$HOME "$@"
-

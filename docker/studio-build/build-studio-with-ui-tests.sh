@@ -6,6 +6,11 @@ set -e
 # trace commands
 set -x
 
+# Temporary workaround with Surefire on Debian with Java 8
+# https://issues.apache.org/jira/browse/SUREFIRE-1588
+# https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class
+export _JAVA_OPTIONS=-Djdk.net.URLClassPath.disableClassPathURLCheck=true
+
 cd /home/hnelson/studio
 mvn -V -f pom-first.xml clean install
 mvn -V clean install -Denable-ui-tests
