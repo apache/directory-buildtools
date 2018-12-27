@@ -26,8 +26,8 @@ RUN apt-get install -y --no-install-recommends xvfb
 RUN apt-get install -y --no-install-recommends krb5-config krb5-user
 
 # Create home directory
-RUN mkdir /home/hnelson && chmod 777 /home/hnelson
-WORKDIR /home/hnelson
+RUN mkdir -p /home/hnelson/studio && chmod 777 /home/hnelson && chmod 777 /home/hnelson/studio
+WORKDIR /home/hnelson/studio
 
 # Add krb5.conf with EXAMPLE.COM domain
 ADD krb5.conf /etc/
