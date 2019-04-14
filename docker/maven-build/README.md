@@ -18,46 +18,64 @@
 
 # About
 
-A docker image to run a regular Maven build within a docker container.
+A docker image for building Apache Directory projects. It's based on the official maven Docker images.
 
-It contains all requirements:
-* OpenJDK 8 or 11
+It contains all tools required for building and testing:
+* Java (OpenJDK 8, 11, or 12)
 * Maven 3.6
-
+* Xvfb (required by Studio UI tests)
+* Kerberos client and krb5 config with EXAMPLE.COM realm (required by Studio UI tests)
+* dpkg, rpm, nsis (for building ApacheDS installers)
 
 ## Build image
 
 See <https://hub.docker.com/_/maven> for available Maven base image tags.
 
-    JDK_VERSION=8
-    docker pull maven:3-jdk-${JDK_VERSION}
-    docker build -t apachedirectory/maven-build:jdk-${JDK_VERSION} --build-arg JDK_VERSION=${JDK_VERSION} .
-
+```
+JDK_VERSION=8
+docker pull maven:3-jdk-${JDK_VERSION}
+docker build -t apachedirectory/maven-build:jdk-${JDK_VERSION} --build-arg JDK_VERSION=${JDK_VERSION} .
+```
 
 ## Publish image
 
-    docker push apachedirectory/maven-build:jdk-${JDK_VERSION}
-
+```
+docker push apachedirectory/maven-build:jdk-${JDK_VERSION}
+```
 
 ## Usage
 
 Local:
 
-    docker run -it --rm \
-        -u $(id -u):$(id -g) \
-        -v ~/.m2:/home/user/.m2 \
-        -v $(pwd):/home/user/project \
-        apachedirectory/maven-build:jdk-8 bash
-
-    mvn clean install
-
+```
+docker run -it --rm \
+    -u $(id -u):$(id -g) \
+    -v ~/.m2:/home/hnelson/.m2 \
+    -v $(pwd):/home/hnelson/project \
+    apachedirectory/maven-build:jdk-8 mvn -V clean verify
+```
 
 On Jenkins:
 
-    docker run -i --rm \
-        -u $(id -u):$(id -g) \
-        -v ~/.m2:/home/user/.m2 \
-        -v $(pwd):/home/user/project \
-        apachedirectory/maven-build:jdk-8
+```
+docker run -i --rm \
+    -u $(id -u):$(id -g) \
+    -v ~/.m2:/home/hnelson/.m2 \
+    -v $(pwd):/home/hnelson/project \
+    apachedirectory/maven-build:jdk-8 mvn -V clean verify
+```
 
+In Jenkins Pipeline:
 
+```
+    agent {
+        docker {
+            label 'ubuntu'
+            image 'apachedirectory/maven-build:jdk-8'
+            args '-v $HOME/.m2:/var/maven/.m2'
+        }
+    }
+    steps {
+         sh 'mvn -V clean verify'
+    }
+```

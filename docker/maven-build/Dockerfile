@@ -20,18 +20,38 @@
 ARG JDK_VERSION=8
 FROM maven:3-jdk-${JDK_VERSION}
 
-# Create home directory
-RUN mkdir -p /home/user/project && chmod 777 /home/user && chmod 777 /home/user/project
-WORKDIR /home/user/project
+# Base images maven:3-jdk-8 and maven:3-jdk-11 are based on Debian
+# Base image maven:3-jdk-12 is based on Oracle Linux
+RUN \
+if [ -e /etc/debian_version ]; then \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb krb5-config krb5-user dpkg rpm nsis && \
+    rm -rf /var/lib/apt/lists/* ; \
+elif [ -e /etc/oracle-release ]; then \
+    yum-config-manager --enable ol7_optional_latest && \
+    yum -y install xorg-x11-server-Xvfb xorg-x11-utils xorg-x11-server-utils krb5-libs krb5-workstation rpm dpkg nsis && \
+    yum -y clean all ; \
+fi
+
+# Create the temp dir for Xvfb
+RUN mkdir -p /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix
 
 # Make /etc/passwd writeable to be able to inject username with dynamic uid/gid
 RUN chmod 666 /etc/passwd
+RUN chmod 666 /etc/group
+
+# Add krb5.conf with EXAMPLE.COM domain
+ADD files/krb5.conf /etc/
+
+# Create home directory
+RUN mkdir -p /home/hnelson/project && chmod 777 /home/hnelson && chmod 777 /home/hnelson/project
+WORKDIR /home/hnelson/project
 
 # Add and configure entrypoint script
-ADD entrypoint.sh /usr/local/bin
+ADD files/entrypoint.sh /usr/local/bin
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # Add build script and make it the default command
-ADD build.sh /usr/local/bin
+ADD files/build.sh /usr/local/bin
 CMD "/usr/local/bin/build.sh"
 
