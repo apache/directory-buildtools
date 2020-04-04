@@ -21,7 +21,7 @@
 A docker image for building Apache Directory projects. It's based on the official maven Docker images.
 
 It contains all tools required for building and testing:
-* Java (OpenJDK 8, 11, or 12)
+* Java (OpenJDK 8, 11, or 14)
 * Maven 3.6
 * Xvfb (required by Studio UI tests)
 * Kerberos client and krb5 config with EXAMPLE.COM realm (required by Studio UI tests)

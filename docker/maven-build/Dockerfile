@@ -21,15 +21,15 @@ ARG JDK_VERSION=8
 FROM maven:3-jdk-${JDK_VERSION}
 
 # Base images maven:3-jdk-8 and maven:3-jdk-11 are based on Debian
-# Base image maven:3-jdk-12 is based on Oracle Linux
+# Base image maven:3-jdk-14 is based on Oracle Linux
 RUN \
 if [ -e /etc/debian_version ]; then \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb krb5-config krb5-user dpkg rpm nsis && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libgtk-3-0 libxtst6 xvfb krb5-config krb5-user dpkg rpm nsis && \
     rm -rf /var/lib/apt/lists/* ; \
 elif [ -e /etc/oracle-release ]; then \
     yum-config-manager --enable ol7_optional_latest && \
-    yum -y install xorg-x11-server-Xvfb xorg-x11-utils xorg-x11-server-utils krb5-libs krb5-workstation rpm dpkg nsis && \
+    yum -y install xorg-x11-server-Xvfb xorg-x11-utils xorg-x11-server-utils gtk3 krb5-libs krb5-workstation rpm dpkg nsis && \
     yum -y clean all ; \
 fi
 
