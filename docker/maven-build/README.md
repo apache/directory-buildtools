@@ -21,8 +21,8 @@
 A docker image for building Apache Directory projects. It's based on the official maven Docker images.
 
 It contains all tools required for building and testing:
-* Java (OpenJDK 8, 11, or 15)
-* Maven 3.6
+* Java (OpenJDK 8, 11, 17)
+* Maven 3.8
 * Xvfb (required by Studio UI tests)
 * Kerberos client and krb5 config with EXAMPLE.COM realm (required by Studio UI tests)
 * dpkg, rpm, nsis (for building ApacheDS installers)
@@ -32,13 +32,12 @@ It contains all tools required for building and testing:
 See <https://hub.docker.com/_/maven> for available Maven base image tags.
 
 Currently used:
-* 8: `maven:3-jdk-8`
-* 11: `maven:3-jdk-11`
-* 15: `maven:3-openjdk-15-slim`
-* 16: `maven:3-openjdk-16-slim`
+* 8: `maven:3-openjdk-8-slim`
+* 11: `maven:3-openjdk-11-slim`
+* 17: `maven:3-openjdk-17-slim`
 
 ```
-JDK_VERSION=15
+JDK_VERSION=17
 docker pull maven:3-openjdk-${JDK_VERSION}-slim
 docker build -t apachedirectory/maven-build:jdk-${JDK_VERSION} --build-arg JDK_VERSION=${JDK_VERSION} .
 ```
