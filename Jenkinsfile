@@ -41,7 +41,7 @@ pipeline {
         sh '''
         export JAVA_HOME=/home/jenkins/tools/java/latest1.8
         export MAVEN_OPTS="-Xmx512m"
-        /home/jenkins/tools/maven/latest3/bin/mvn -V clean deploy
+        /home/jenkins/tools/maven/latest3/bin/mvn -V -U clean deploy
         '''
       }
       post {
