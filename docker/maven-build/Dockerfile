@@ -25,7 +25,7 @@ FROM maven:3-openjdk-${JDK_VERSION}-slim
 # Base images maven:3-openjdk-*-slim are based on Debian
 RUN \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libgtk-3-0 libxtst6 xvfb krb5-config krb5-user dpkg rpm nsis && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libgtk-3-0 libxtst6 xvfb iputils-ping ldap-utils libsasl2-modules-ldap libsasl2-modules-gssapi-mit krb5-config krb5-user dpkg rpm nsis && \
     rm -rf /var/lib/apt/lists/*
 
 # Create the temp dir for Xvfb
