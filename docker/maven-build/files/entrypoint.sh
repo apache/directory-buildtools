@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 #   Licensed to the Apache Software Foundation (ASF) under one 
 #   or more contributor license agreements.  See the NOTICE file
@@ -16,7 +17,6 @@
 #   specific language governing permissions and limitations
 #   under the License.
 #
-#!/bin/bash
 
 # Stop execution if any command fails (i.e. exits with status code > 0)
 set -e
