@@ -36,6 +36,5 @@
   <description>
      Customized checkstyle configuration used by the maven-checkstyle-plugin.
   </description>
-
 </project>
 
